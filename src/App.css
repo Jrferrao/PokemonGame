@@ -1,5 +1,5 @@
 body {
-	overflow: hidden;
+	overflow-x: hidden;
 }
 
 .App {
@@ -11,6 +11,7 @@ body {
 }
 
 .App::before {
+	max-height: fit-content;
 	content: "";
 	background: url(./assets/pokeball-background.png) no-repeat;
 	background-size: cover;
@@ -21,7 +22,6 @@ body {
 	bottom: 0px;
 	left: 0px;
 	opacity: 0.15;
-	transform: rotate(35deg);
 }
 
 h1 {
