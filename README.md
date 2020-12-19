@@ -1,3 +1,8 @@
+# Who's That Pokémon?
+This is a pokémon minigame built using React.js. The data is fetched from [PokeAPI](https://pokeapi.co/)
+
+### Project's URL: https://pokemon-game-2cd02.web.app/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
