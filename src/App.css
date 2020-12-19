@@ -1,38 +1,70 @@
+body {
+	overflow: hidden;
+}
+
 .App {
-  text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	font-family: "Open Sans", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App::before {
+	content: "";
+	background: url(./assets/pokeball-background.png) no-repeat;
+	background-size: cover;
+	position: absolute;
+	z-index: -10;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	opacity: 0.15;
+	transform: rotate(35deg);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1 {
+	margin-top: 0;
+	padding: 15px;
+	width: 100%;
+	background-color: #d30208;
+	color: #ffffff;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+img {
+	margin: 0 0 10px;
+	width: 200px;
+	border-radius: 50px;
+	background-color: #0000000e;
+	transition: filter 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.hidden {
+	filter: brightness(0%);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+	margin-bottom: 5px;
+	padding: 10px;
+	background-color: #d30208;
+	width: 130px;
+	border: transparent solid 2px;
+	border-radius: 7px;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #b80006;
+}
+
+button.try-another {
+	margin-top: 30px;
+	background-color: #0000ff;
+}
+
+button.try-another:hover {
+	background-color: #0000aa;
 }
