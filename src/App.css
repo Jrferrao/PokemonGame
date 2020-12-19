@@ -44,6 +44,22 @@ img {
 	filter: brightness(0%);
 }
 
+span {
+	font-weight: bold;
+}
+
+span.lose {
+	padding: 0 8px;
+	background-color: #d30208;
+	color: white;
+}
+
+span.win {
+	padding: 0 8px;
+	background-color: #0bb10b;
+	color: white;
+}
+
 button {
 	margin-bottom: 5px;
 	padding: 10px;

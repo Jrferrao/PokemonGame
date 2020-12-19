@@ -42,6 +42,13 @@ function App() {
 				.then((response) => {
 					setPokemonsArray((prevPokemons) => [...prevPokemons, response]);
 					setIsLoading(false);
+				})
+				.catch((error) => {
+					alert(
+						error +
+							". Please reload the page and be sure to have internet connection."
+					);
+					setIsLoading(false);
 				});
 		}
 	}, [pokemonsArray]);
@@ -57,11 +64,20 @@ function App() {
 		setWrongAnswer(true);
 	};
 
+	const resetGame = (event) => {
+		event.preventDefault();
+		setPokemonsArray([]);
+		setRightPokemonNumber(randomIntegerNumber(3));
+		setImgState("hidden");
+		setRightAnswer(false);
+		setWrongAnswer(false);
+	};
+
 	let pokemonImage = null;
 	if (isLoading) {
 		pokemonImage = <p className="loading">Loading...</p>;
 	}
-	if (pokemonsArray[rightPokemonNumber]) {
+	if (pokemonsArray.length === 4) {
 		pokemonImage = (
 			<img
 				className={imgState}
@@ -72,42 +88,44 @@ function App() {
 	}
 	let options =
 		pokemonsArray.map((pokemon, index) => {
-			if (index === rightPokemonNumber) {
-				return (
-					<button
-						key={pokemon.name}
-						className="option"
-						onClick={(event) => rightAnswerHandler(event)}
-					>
-						{capFirstLetter(pokemon.name)}
-					</button>
-				);
-			} else {
-				return (
-					<button
-						key={pokemon.name}
-						className="option"
-						onClick={(event) => wrongAnswerHandler(event)}
-					>
-						{capFirstLetter(pokemon.name)}
-					</button>
-				);
+			if (pokemon) {
+				if (index === rightPokemonNumber) {
+					return (
+						<button
+							key={pokemon.name}
+							className="option"
+							onClick={(event) => rightAnswerHandler(event)}
+						>
+							{capFirstLetter(pokemon.name)}
+						</button>
+					);
+				} else {
+					return (
+						<button
+							key={pokemon.name}
+							className="option"
+							onClick={(event) => wrongAnswerHandler(event)}
+						>
+							{capFirstLetter(pokemon.name)}
+						</button>
+					);
+				}
 			}
 		}) || null;
 
 	if (rightAnswer) {
 		options = (
 			<p>
-				Well done! It was{" "}
-				{capFirstLetter(pokemonsArray[rightPokemonNumber].name)}
+				<span className="win">Well done!</span> It was{" "}
+				<span>{capFirstLetter(pokemonsArray[rightPokemonNumber].name)}</span>
 			</p>
 		);
 	}
 	if (wrongAnswer) {
 		options = (
 			<p>
-				You lose! It was{" "}
-				{capFirstLetter(pokemonsArray[rightPokemonNumber].name)}
+				<span className="lose">You lose!</span> It was{" "}
+				<span>{capFirstLetter(pokemonsArray[rightPokemonNumber].name)}</span>
 			</p>
 		);
 	}
@@ -119,8 +137,8 @@ function App() {
 			{options}
 			<button
 				className="try-another"
-				onClick={() => {
-					window.location.reload();
+				onClick={(event) => {
+					resetGame(event);
 				}}
 			>
 				Try another
