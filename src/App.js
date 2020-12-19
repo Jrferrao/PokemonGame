@@ -15,7 +15,7 @@ const randomIntegerNumber = (limSup, limInf = 0) => {
 	}
 };
 
-const pokemonApiLength = 898;
+const pokeApiLength = 898;
 
 // App
 
@@ -34,7 +34,7 @@ function App() {
 			setIsLoading(true);
 			fetch(
 				`https://pokeapi.co/api/v2/pokemon/${randomIntegerNumber(
-					pokemonApiLength,
+					pokeApiLength,
 					1
 				)}`
 			)
@@ -75,7 +75,14 @@ function App() {
 
 	let pokemonImage = null;
 	if (isLoading) {
-		pokemonImage = <p className="loading">Loading...</p>;
+		pokemonImage = (
+			<div className="lds-ellipsis">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		);
 	}
 	if (pokemonsArray.length === 4) {
 		pokemonImage = (
@@ -86,8 +93,9 @@ function App() {
 			/>
 		);
 	}
-	let options =
-		pokemonsArray.map((pokemon, index) => {
+	let options;
+	if (pokemonsArray.length === 4) {
+		options = pokemonsArray.map((pokemon, index) => {
 			if (pokemon) {
 				if (index === rightPokemonNumber) {
 					return (
@@ -111,7 +119,8 @@ function App() {
 					);
 				}
 			}
-		}) || null;
+		});
+	}
 
 	if (rightAnswer) {
 		options = (
@@ -133,8 +142,8 @@ function App() {
 	return (
 		<div className="App">
 			<h1>Who's that Pokémon?</h1>
-			{pokemonImage}
-			{options}
+			<div className="image-container">{pokemonImage}</div>
+			<div className="options-container">{options}</div>
 			<button
 				className="try-another"
 				onClick={(event) => {
